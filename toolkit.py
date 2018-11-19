@@ -13,14 +13,26 @@ import numpy as np
 '''
 cv_series= 0
 
-def cv_show(from_img, name="Unnamed"):
+def cv_show(*from_imgs, name="'L': next, 'A': back, 'E': exit"):
     """ Basic usage:cv_show(cv2_img),
         show a image with default name "Unnamed".
     """
     global cv_series
-    cv2.imshow(name + " - " + str(cv_series), from_img)
     cv_series+= 1
-    cv2.waitKey(0)
+    i= 0
+    while True:
+        cv2.imshow(name + " - " + str(i+cv_series), from_imgs[i])
+        if cv2.waitKey(0) == ord('l'):
+            i+= 1
+            cv2.destroyAllWindows()
+        elif cv2.waitKey(0) == ord('a'):
+            i-= 1
+            cv2.destroyAllWindows()
+        elif cv2.waitKey(0) == ord('e'):
+            cv2.destroyAllWindows()
+            break
+        if i>=len(from_imgs):i=0
+        elif i<0:i=len(from_imgs)-1
 
 
 def cv_resize(from_img,max=800):
@@ -28,9 +40,10 @@ def cv_resize(from_img,max=800):
         the maximum height/width of the image is limited to 800px
         if only has one argument.
     """
-    if from_img.shape[0] <= max and from_img.shape[1] <= max:return from_img
+    if from_img.shape[0] <= max and from_img.shape[1] <= max:return 1, from_img
     ratio=max/from_img.shape[0] if from_img.shape[0]>from_img.shape[1] else max/from_img.shape[1]
-    return cv2.resize(from_img, None, fx=ratio, fy=ratio)  # resize since image is huge
+    return ratio, cv2.resize(from_img, None, fx=ratio, fy=ratio)  # resize since image is huge
+
 
 def cv_BoxPoints(rect):
     """
@@ -97,6 +110,10 @@ def del_isolatedot(square,nearby_ratio = 1/1000,white_ratio = 0.7,colour_ratio=1
     return square
 
 
+def prints(*datas):
+    for data in datas:
+        print(data)
+        print("="*20)
 
 
 def corner_points(points):
