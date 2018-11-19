@@ -10,9 +10,13 @@ print("Debug Code:",dc)
 With the help of the documents on https://docs.opencv.org
 therefore I can finish the project.And also thanks the help
 from stackoverflow.com for solving some of the problems.
+'''
+
+
+'''
+Part 1
+
 1) 对ppt区域进行识别、还原原文变形
-2) 对指定区域（尽量保持纯色背景）的内容清晰化、二值化处理
-   并对其中带图形的区域尽最大可能保留信息量
 '''
 
 
@@ -36,12 +40,20 @@ max_contour= max(contours, key= cv2.contourArea)
 # 与要求的四边形不符
 # cv2.drawContours(rsz_img, cv_BoxPoints(cv2.minAreaRect(max_contour)), -1, (0,255,0), 2)
 approx_points=cv2.approxPolyDP(max_contour,0.1 * cv2.arcLength(max_contour, True),True)
-#if dc:print(cv2.approxPolyDP(max_contour,3,True))
 
 
-print(approx_points, '==\n\n==', np.asarray(corner_points(approx_points)))
+if dc:prints(approx_points, np.asarray(corner_points(approx_points)))
 # 计算拉伸后的矩形定位点并图形变换
-M= cv2.getPerspectiveTransform(np.asarray(approx_points, np.float32), np.asarray(corner_points(approx_points), np.float32))
+M= cv2.getPerspectiveTransform(np.asarray(approx_points, np.float32),
+                               np.asarray(corner_points(approx_points), np.float32))
 dst= cv2.warpPerspective(rsz_img, M, (corner_points(approx_points)[2][0][0], corner_points(approx_points)[1][0][1]))
 
-plt_show(rsz_img, dst)
+if dc:plt_show(rsz_img, dst)
+
+
+'''
+Part 2
+
+2) 对指定区域（尽量保持纯色背景）的内容清晰化、二值化处理
+   并对其中带图形的区域尽最大可能保留信息量
+'''
