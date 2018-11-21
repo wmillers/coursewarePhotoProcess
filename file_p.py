@@ -12,6 +12,21 @@ import os
 import exifread
 
 
+def findEndSlash(s):
+    for i in range(1,len(s)):
+        if s[-i]!='\\':
+            break
+    return int(i-1)
+
+
+def delEndSlash(s):
+    i=findEndSlash(s)
+    if i==0:
+        return s
+    else:
+        return s[:-i]
+
+
 def getExif(pathname, FIELD = 'EXIF DateTimeOriginal'):
     fd = open(pathname, 'rb')
     tags = exifread.process_file(fd)
@@ -41,7 +56,7 @@ def get_FileCreateTime(filePath, asfilename=False):
     return TimeStampToTime(t, asfilename)
 
 
-def reconstrut_filename(filePath, newPath):
+def reconstrut_filename(filePath, newPath=''):
     '''
     Due to the way Windows and Linux contruct the path differently,
     this function only works on Windows("C:\\1\1" "\root\1").
@@ -59,9 +74,10 @@ def reconstrut_filename(filePath, newPath):
     exif_valid, fname_p2= getExif(filePath)
     if not exif_valid:fname_p2= get_FileCreateTime(filePath, asfilename=True)
 
-    if newPath=='':pname_p1 = '\\'.join(os.path.splitext(filePath)[0].split('\\')[0:-1])
-    else:pname_p1='\\'.join(newPath.split('\\'))
-    oname_p3 = os.path.splitext(filePath)[0].split('\\')[-1] + os.path.splitext(filePath)[1]
+    if newPath=='':pname_p1 = os.path.split(filePath)[0]
+    else:pname_p1=newPath
+    pname_p1=delEndSlash(pname_p1)
+    oname_p3 = os.path.split(filePath)[1]
     if exif_valid:symbol_code='e'
     else:symbol_code='p'
     duplicated=0
@@ -70,15 +86,24 @@ def reconstrut_filename(filePath, newPath):
         if not os.path.exists(new_name):break
         duplicated+=1
     if duplicated>9: return False
-    print(filePath,new_name)
-    os.rename(filePath, new_name)
+    print(new_name)
+    #os.rename(filePath, new_name)
     return True
 
-'''
-            
-        for filename in os.listdir('.'):
-            if os.path.isfile(filename):
-                getExif(filename)
-                '''
 
-print(reconstrut_filename(r'C:\Users\Administrator\Desktop\Documents\python_work\cours_image\im\1.jpg'))
+
+def dirfile_rename(fileDir, newPath=''):
+    for root, dirs, files in os.walk(fileDir):break
+    root=delEndSlash(root)
+    if newPath=='':
+        newPath=root
+        if not os.path.exists(newPath):os.mkdir(newPath)
+    for file in files:
+        try:
+            if reconstrut_filename(root + '\\' + file, newPath):
+                raise FileExistsError
+        except:
+            continue
+
+
+dirfile_rename("C:\\Users\\Administrator\\Desktop\\Documents\\python_work\\cours_image\\im")
