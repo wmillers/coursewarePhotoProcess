@@ -59,7 +59,7 @@ def get_FileCreateTime(filePath, asfilename=False):
 def reconstrut_filename(filePath, newPath=''):
     '''
     Due to the way Windows and Linux contruct the path differently,
-    this function only works on Windows("C:\\1\1" "\root\1").
+    this function only works on Windows(r"C:\1\1",r"\root\1").
 
     1) call getExif()
     2) if 1 returns False: call get_FileCreateTime()->TimeStampToTime()
@@ -106,4 +106,5 @@ def dirfile_rename(fileDir, newPath=''):
             continue
 
 
-dirfile_rename("C:\\Users\\Administrator\\Desktop\\Documents\\python_work\\cours_image\\im")
+if __name__=='__main__':
+    dirfile_rename("C:\\Users\\Administrator\\Desktop\\Documents\\python_work\\cours_image\\im")
