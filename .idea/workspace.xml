@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a1441641-fcb4-4837-b9d9-c6cdcade7a5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example.py" beforeDir="false" afterPath="$PROJECT_DIR$/example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file_p.py" beforeDir="false" afterPath="$PROJECT_DIR$/file_p.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/im/1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/t-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/t0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/t5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/t6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/t7.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/image_p.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_p.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toolkit.py" beforeDir="false" afterPath="$PROJECT_DIR$/toolkit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,12 +50,12 @@
         <counts>
           <entry key="py" value="15474" />
           <entry key="test2" value="28" />
-          <entry key="txt" value="242" />
+          <entry key="txt" value="263" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="242" />
+          <entry key="PLAIN_TEXT" value="263" />
           <entry key="Python" value="15502" />
         </counts>
       </usages-collector>
@@ -413,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1542804233475</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Pruning leaves">
+      <created>1543743294527</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1543743294527</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -427,6 +425,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12864077" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -463,7 +462,8 @@
     <MESSAGE value="Finish functions to modify a single file with its own's timestamp(from Exif or the time filecreated)" />
     <MESSAGE value="Basically finished" />
     <MESSAGE value="Completed the basic structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed the basic structure" />
+    <MESSAGE value="Pruning leaves" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pruning leaves" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

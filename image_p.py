@@ -5,6 +5,8 @@ from scipy import ndimage
 from file_p import *
 
 dc=True  # Debug Code
+# dc=False
+if __name__=='__main__':print("Debug Code:",dc)
 
 '''
 With the help of the documents on https://docs.opencv.org
@@ -46,7 +48,7 @@ def stretchProperly(img_name=r'im\1.jpg', max_size=1200):
     # 计算拉伸后的矩形定位点并图形变换
     M= cv2.getPerspectiveTransform(np.asarray(approx_points, np.float32),
                                          np.asarray(corner_points(approx_points), np.float32))
-    if dc:dst= cv2.warpPerspective(rsz_img, M,
+    dst= cv2.warpPerspective(rsz_img, M,
                                    (corner_points(approx_points)[2][0][0],
                                     corner_points(approx_points)[1][0][1]))
 
@@ -59,6 +61,20 @@ Part 2
 2) 对指定区域（尽量保持纯色背景）的内容清晰化、二值化处理
    并对其中带图形的区域尽最大可能保留信息量
 '''
+def bestTheshFinder(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
+    if dc:
+        thresh_gray=[]
+        j=0
+        for i in range(130,210,10):
+            j+=1
+            retval, temp = cv2.threshold(gray, thresh=i, maxval=255, type=cv2.THRESH_BINARY)
+            thresh_gray.append(temp)
+        plt_show(*thresh_gray)
+
+
+
+
 
 '''
 Notice that we don't need to get original-sized image,
@@ -69,6 +85,7 @@ Ideal thresh is 150~190
 '''
 def removeNoiseImg(img):
     if dc:print(print("Placeholder"))
+    return img
 
 '''
 Part 3
@@ -106,5 +123,7 @@ def dirImageProcess(fileDir, newPath=''):
 
 
 # Test area
-print("Debug Code:",dc)
-stretchProperly()
+
+if __name__=='__main__':
+    dst_sp= stretchProperly(r'C:\Users\Administrator\Desktop\Documents\python_work\cours_image\im\1.jpg')
+    print(dst_sp)
