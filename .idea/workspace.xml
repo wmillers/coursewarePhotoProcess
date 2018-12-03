@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a1441641-fcb4-4837-b9d9-c6cdcade7a5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example.py" beforeDir="false" afterPath="$PROJECT_DIR$/example.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image_p.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_p.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toolkit.py" beforeDir="false" afterPath="$PROJECT_DIR$/toolkit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +17,7 @@
     <SUITE FILE_PATH="coverage/cours_image$file_p.coverage" NAME="file_p Coverage Results" MODIFIED="1543590930305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cours_image$main.coverage" NAME="main Coverage Results" MODIFIED="1542464670636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cours_image$test.coverage" NAME="test Coverage Results" MODIFIED="1542634910413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/cours_image$example.coverage" NAME="example Coverage Results" MODIFIED="1543740222488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/cours_image$example.coverage" NAME="example Coverage Results" MODIFIED="1543841503714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cours_image$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1542384347304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cours_image$image_p.coverage" NAME="image_p Coverage Results" MODIFIED="1543733405847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -48,15 +50,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="15474" />
+          <entry key="py" value="16442" />
           <entry key="test2" value="28" />
-          <entry key="txt" value="263" />
+          <entry key="txt" value="354" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="263" />
-          <entry key="Python" value="15502" />
+          <entry key="PLAIN_TEXT" value="354" />
+          <entry key="Python" value="16470" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -102,12 +104,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/image_p.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="50" column="36" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+            <state relative-caret-position="135">
+              <caret line="50" column="36" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="36" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1543740218524" expanded="true" signature="462:464" ph="..." />
-                <marker date="1543740218524" expanded="true" signature="2228:2231" ph="..." />
+                <marker date="1543841503231" expanded="true" signature="460:462" ph="..." />
+                <marker date="1543841503231" expanded="true" signature="3938:3941" ph="..." />
               </folding>
             </state>
           </provider>
@@ -116,14 +118,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolkit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="163" column="4" lean-forward="true" selection-start-line="163" selection-start-column="4" selection-end-line="163" selection-end-column="4" />
+            <state relative-caret-position="-664">
+              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <marker date="1543740049687" expanded="true" signature="1416:1555" ph="..." />
-                <marker date="1543740049687" expanded="true" signature="4412:5812" ph="..." />
-                <marker date="1543740049687" expanded="true" signature="5831:5899" ph="..." />
-                <marker date="1543740049687" expanded="true" signature="6167:6172" ph="..." />
+                <marker date="1543841400549" expanded="true" signature="1560:1699" ph="..." />
+                <marker date="1543841400549" expanded="true" signature="2840:2844" ph="..." />
+                <marker date="1543841400549" expanded="true" signature="4627:4629" ph="..." />
+                <marker date="1543841400549" expanded="true" signature="4648:4716" ph="..." />
+                <marker date="1543841400549" expanded="true" signature="4984:4989" ph="..." />
               </folding>
             </state>
           </provider>
@@ -132,8 +135,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="133">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -167,9 +173,9 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/test2.py" />
         <option value="$PROJECT_DIR$/file_p.py" />
-        <option value="$PROJECT_DIR$/example.py" />
         <option value="$PROJECT_DIR$/toolkit.py" />
         <option value="$PROJECT_DIR$/image_p.py" />
+        <option value="$PROJECT_DIR$/example.py" />
       </list>
     </option>
   </component>
@@ -411,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543743294527</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Doing:find if corners of the image is too dark">
+      <created>1543743395681</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1543743395681</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -427,29 +440,53 @@
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12864077" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12864077" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.42725173" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39838338" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49919093" visible="true" weight="0.39838338" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3290993" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008091" side_tool="true" weight="0.39838338" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3290993" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3394919" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="397" y="331" width="882" height="623" id="SciView" order="3" type="FLOATING" visible="true" weight="0.20631067" />
+      <window_info anchor="right" x="366" y="294" width="882" height="623" id="SciView" order="3" show_stripe_button="false" type="FLOATING" weight="0.20631067" />
       <window_info anchor="right" id="Database" order="4" weight="0.32928804" />
       <window_info anchor="right" x="0" y="0" width="274" height="800" id="Documentation" order="5" side_tool="true" weight="0.32928804" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12864077" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.42725173" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49919093" visible="true" weight="0.39838338" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3290993" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008091" side_tool="true" weight="0.39838338" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3290993" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.3394919" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" x="312" y="357" width="882" height="623" id="SciView" order="3" show_stripe_button="false" type="FLOATING" weight="0.20631067" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32928804" />
+      <window_info anchor="right" x="0" y="0" width="274" height="800" id="Documentation" order="5" side_tool="true" weight="0.32928804" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -463,7 +500,8 @@
     <MESSAGE value="Basically finished" />
     <MESSAGE value="Completed the basic structure" />
     <MESSAGE value="Pruning leaves" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pruning leaves" />
+    <MESSAGE value="Doing:find if corners of the image is too dark" />
+    <option name="LAST_COMMIT_MESSAGE" value="Doing:find if corners of the image is too dark" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -545,36 +583,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/image_p.py">
+    <entry file="file://$PROJECT_DIR$/toolkit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="50" column="36" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+        <state relative-caret-position="-664">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1543740218524" expanded="true" signature="462:464" ph="..." />
-            <marker date="1543740218524" expanded="true" signature="2228:2231" ph="..." />
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1543841400549" expanded="true" signature="1560:1699" ph="..." />
+            <marker date="1543841400549" expanded="true" signature="2840:2844" ph="..." />
+            <marker date="1543841400549" expanded="true" signature="4627:4629" ph="..." />
+            <marker date="1543841400549" expanded="true" signature="4648:4716" ph="..." />
+            <marker date="1543841400549" expanded="true" signature="4984:4989" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toolkit.py">
+    <entry file="file://$PROJECT_DIR$/image_p.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="163" column="4" lean-forward="true" selection-start-line="163" selection-start-column="4" selection-end-line="163" selection-end-column="4" />
+        <state relative-caret-position="135">
+          <caret line="50" column="36" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="36" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <marker date="1543740049687" expanded="true" signature="1416:1555" ph="..." />
-            <marker date="1543740049687" expanded="true" signature="4412:5812" ph="..." />
-            <marker date="1543740049687" expanded="true" signature="5831:5899" ph="..." />
-            <marker date="1543740049687" expanded="true" signature="6167:6172" ph="..." />
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1543841503231" expanded="true" signature="460:462" ph="..." />
+            <marker date="1543841503231" expanded="true" signature="3938:3941" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

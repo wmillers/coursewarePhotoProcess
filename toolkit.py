@@ -21,7 +21,10 @@ def cv_show(*from_imgs, name="'L': next, 'A': back, 'E': exit"):
     cv_series+= 1
     i= 0
     while True:
-        cv2.imshow(name + " - " + str(i+cv_series), from_imgs[i])
+        if(len(from_imgs)>1):
+            cv2.imshow(name + " - " + str(i) + " - " +str(cv_series), from_imgs[i])
+        else:
+            cv2.imshow("Press 'E' to exit" + " - " +str(cv_series), from_imgs[i])
         if cv2.waitKey(0) == ord('l'):
             i+= 1
             cv2.destroyAllWindows()
@@ -88,6 +91,14 @@ def plt_show(*from_imgs):
     plt.show()
 
 
+def plt_dotshow(dots):
+    xx=[x for x in range(0,len(dots))]
+    plt.plot(xx,dots)
+    plt.grid()
+    plt.show()
+
+
+
 def bytearray_toimg(*datas,show=1):
     """ Basic usage:bytearray_toimg(np_array),
         convert a numpy array to image and show it
@@ -129,54 +140,6 @@ def del_isolatedot(square,nearby_ratio = 1/1000,white_ratio = 0.7,colour_ratio=1
                 square[x - colournearby:x + colournearby + 1, y - colournearby:y + colournearby + 1] = white
     print(j,"/",i)
     return square
-
-
-
-def isCornerTooDark(img, limit=0.8, area=2):
-    '''
-    If corners of the image that was after thresh_gray-ed
-    is too dark, the best solution is to reduce the thresh level.
-    '''
-    #default (also recommended) one is 1/4
-    area=1/(area+2)
-    img_x, img_y=img.shape[0], img.shape[1]
-
-    # black = 0
-    white = 255
-    length_x=int(area*img_x)
-    length_y=int(area*img_y)
-    #图形说明见f2.png
-    #mx^2+ny^2=1
-    #numpy解二元一次方程
-    known_pos=[[img_x, img_y - length_y],   # 相邻的两个交点
-               [img_x - length_x, img_y]]
-    m, n=np.linalg.solve([[known_pos[0][0]**2, known_pos[0][1]**2],
-                          [known_pos[1][0]**2, known_pos[1][1]**2]],
-                         [1,1])*5
-    #通过同时平移椭圆和矩形，使得矩形的左下端位于(0,0)得到的
-    #函数计算得到椭圆区域，并反转取值，得到黑色遮罩区域
-    #但是注意遮罩True表示区域
-    outside_ellipse=np.fromfunction(lambda x,y :m*(x-img_x/2)**2+n*(y-img_y/2)**2<=1,
-                                    [img_x, img_y])
-    #prints(img_x,img_y,m,n,outside_ellipse)
-
-    #不同过滤值下的图片
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
-    thresh_gray=[]
-    corner_area=[]
-    j=0
-    #150~190
-    for i in range(160,200,10):
-        retval, temp = cv2.threshold(gray, thresh=i, maxval=white, type=cv2.THRESH_BINARY)
-        thresh_gray.append(temp)
-        corner_area.append(np.ma.array(thresh_gray[j],mask=outside_ellipse))
-        prints(corner_area[j].mean()/white)
-        j+=1
-
-    plt_show(*corner_area)
-
-
-
 
 
 
