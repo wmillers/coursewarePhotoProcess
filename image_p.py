@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 from toolkit import *
 from scipy import ndimage
-from file_p import *
 
 dc=True  # Debug Code
 dc=False
@@ -143,32 +142,6 @@ Part 3
 3) 文件处理模块，遍历指定根目录，并将文件经过p1、p2处理，
    保存至指定文件夹（默认根目录下的output文件夹）
 '''
-def dirImageProcess(fileDir, newPath=''):
-    error_list=[]
-    for root, dirs, files in os.walk(fileDir):break
-    root=delEndSlash(root)
-    if newPath=='':
-        newPath=root+'\\'+'output'+'\\'
-        if not os.path.exists(newPath):os.mkdir(newPath)
-    for file in files:
-        try:
-            dst= stretchProperly(root + '\\' + file)
-            dst= removeNoiseImg(dst)
-            cv2.imwrite(newPath+file, dst)
-        except:
-            error_list.append(file)
-            continue
-
-    if error_list!=[]:
-        print("ERROR while processing the files.")
-        print("fileDir="+fileDir)
-        print("newPath="+newPath)
-        print("fileName:")
-        for i in error_list:
-            print(i)
-        return False
-    else:
-        return True
 
 
 

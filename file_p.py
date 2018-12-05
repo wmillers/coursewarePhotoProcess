@@ -13,9 +13,11 @@ import exifread
 
 
 def findEndSlash(s):
-    for i in range(1,len(s)):
+    if s=='':return 0
+    for i in range(1,len(s)+1):
         if s[-i]!='\\':
             break
+    if s[0]=='\\' and i==len(s):return i
     return int(i-1)
 
 
@@ -85,26 +87,27 @@ def reconstrut_filename(filePath, newPath=''):
         new_name= pname_p1 + '\\' +fname_p2+'_'+symbol_code+str(duplicated)+'_'+oname_p3
         if not os.path.exists(new_name):break
         duplicated+=1
-    if duplicated>9: return False
-    print(new_name)
+    if duplicated>9:raise FileExistsError
+    #print(new_name)
     #os.rename(filePath, new_name)
-    return True
+    return new_name
 
 
 
-def dirfile_rename(fileDir, newPath=''):
+def fileDirList(fileDir):
     for root, dirs, files in os.walk(fileDir):break
     root=delEndSlash(root)
+    return root, files
+
+
+def newFilePath(root, newPath=''):
+    root=delEndSlash(root)
     if newPath=='':
-        newPath=root
-        if not os.path.exists(newPath):os.mkdir(newPath)
-    for file in files:
-        try:
-            if reconstrut_filename(root + '\\' + file, newPath):
-                raise FileExistsError
-        except:
-            continue
+        newPath=root+'\\'+'output'+'\\'
+    elif not os.path.isabs(newPath):raise Exception("You should use absolute path, not '"+newPath+"'")
+    if not os.path.exists(newPath):os.mkdir(newPath)
+    return newPath
 
 
 if __name__=='__main__':
-    dirfile_rename("C:\\Users\\Administrator\\Desktop\\Documents\\python_work\\cours_image\\im")
+    fileDirList("C:\\Users\\Administrator\\Desktop\\Documents\\python_work\\cours_image\\im")
