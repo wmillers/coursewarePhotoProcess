@@ -1,5 +1,5 @@
 import exifread
-import os, time
+import os, time, shutil
 
 '''
     获取文件夹中的文件信息，并依次传递入
@@ -8,8 +8,6 @@ import os, time
     后的文件。
 '''
 
-import os
-import exifread
 
 
 def findEndSlash(s):
@@ -29,7 +27,7 @@ def delEndSlash(s):
         return s[:-i]
 
 
-def getExif(pathname, FIELD = 'EXIF DateTimeOriginal'):
+def getExifTime(pathname, FIELD = 'EXIF DateTimeOriginal'):
     fd = open(pathname, 'rb')
     tags = exifread.process_file(fd)
     fd.close()
@@ -39,6 +37,18 @@ def getExif(pathname, FIELD = 'EXIF DateTimeOriginal'):
         return True, time_name
     else:
         return False, ""
+
+
+def getExifOrientation(pathname, FIELD = 'Image Orientation'):
+    fd = open(pathname, 'rb')
+    tags = exifread.process_file(fd)
+    fd.close()
+    if FIELD in tags:
+        a=tags[FIELD].values[0]
+        if a in [3,6,8]:
+            return [180,90,270][[3,6,8].index(a)]
+    return 0
+
 
 
 def TimeStampToTime(timestamp, asfilename=False):
@@ -63,7 +73,7 @@ def reconstrut_filename(filePath, newPath=''):
     Due to the way Windows and Linux contruct the path differently,
     this function only works on Windows(r"C:\1\1",r"\root\1").
 
-    1) call getExif()
+    1) call getExifTime()
     2) if 1 returns False: call get_FileCreateTime()->TimeStampToTime()
     3) collect first part(p2) name based on 1/2
     4) splice the p2 with pathname(p1) and original file name(p3)
@@ -73,7 +83,7 @@ def reconstrut_filename(filePath, newPath=''):
     6) rename old file with new name
     '''
 
-    exif_valid, fname_p2= getExif(filePath)
+    exif_valid, fname_p2= getExifTime(filePath)
     if not exif_valid:fname_p2= get_FileCreateTime(filePath, asfilename=True)
 
     if newPath=='':pname_p1 = os.path.split(filePath)[0]
@@ -88,8 +98,6 @@ def reconstrut_filename(filePath, newPath=''):
         if not os.path.exists(new_name):break
         duplicated+=1
     if duplicated>9:raise FileExistsError
-    #print(new_name)
-    #os.rename(filePath, new_name)
     return new_name
 
 
@@ -100,13 +108,21 @@ def fileDirList(fileDir):
     return root, files
 
 
-def newFilePath(root, newPath=''):
+def newFilePath(root, newPath='', relaPath='output'):
     root=delEndSlash(root)
     if newPath=='':
-        newPath=root+'\\'+'output'+'\\'
+        newPath=root+'\\'+relaPath+'\\'
     elif not os.path.isabs(newPath):raise Exception("You should use absolute path, not '"+newPath+"'")
     if not os.path.exists(newPath):os.mkdir(newPath)
     return newPath
+
+
+def copyFiles(root, newPath, fileList):
+    root=delEndSlash(root)+'\\'
+    newPath=delEndSlash(newPath)+'\\'
+    for file in fileList:
+        shutil.copy(root+file,newPath+file)
+
 
 
 if __name__=='__main__':
