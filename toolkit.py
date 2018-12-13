@@ -1,4 +1,3 @@
-from scipy import ndimage
 from matplotlib import pyplot as plt
 from PIL.Image import frombytes
 import cv2
@@ -11,6 +10,67 @@ import numpy as np
     过程打包，主要用于图像的处理和输出，
     使用的库为cv2,matplotlib,PIL,numpy
 '''
+
+class errorProcess(object):
+    def __init__(self):
+        # 动态生成错误类型统计表
+        self.errorType = ['NONE', 'FILE', 'IMAGE', 'WRITE']
+        self.errorCount = [0 for x in range(0, len(self.errorType))]
+        # 形成一个由列表组成的有序字典
+        self.__errorInfoName = ['tag', 'file', 'info']
+        self.__errorLastInfoValue = [self.errorType[0], '', '']
+        self.errorInfo = []
+        self.errorTotalCount = 0
+
+    def index(self, name):
+        return self.__errorInfoName.index(name)
+
+    def add(self, tagindex, file, info):
+        if tagindex not in range(0,len(self.errorType)):
+            tagindex=0
+        self.__errorLastInfoValue[self.index('tag')] =self.errorType[tagindex]
+        self.__errorLastInfoValue[self.index('file')]=file
+        self.__errorLastInfoValue[self.index('info')]=info
+        self.errorInfo.append(self.__errorLastInfoValue[:])
+        self.errorCount[tagindex]+=1
+        self.errorTotalCount+=1
+
+    def last_index(self):
+        return self.errorTotalCount-1
+
+    def show(self, index):
+        print('[ERROR][%03d:%2d:%5s][Where]%s:[At]%s' %
+              (index + 1,
+               self.errorType.index(self.errorInfo[index][self.index('tag')]),
+               self.errorInfo[index][self.index('tag')],
+               self.errorInfo[index][self.index('file')],
+               repr(self.errorInfo[index][self.index('info')])))
+
+    def show_all(self):
+        for i in range(0,self.last_index()+1):
+            self.show(i)
+
+    def show_last(self):
+        self.show(self.last_index())
+
+    def show_all_type(self):
+        for i in range(0, self.errorTotalCount):
+            if self.errorCount[i] != 0:
+                print(self.errorType[i] + ' error:' + str(self.errorCount[i]))
+
+    def is_empty(self):
+        if self.errorTotalCount==0:
+            return True
+        else:
+            return False
+
+    def error_file_list(self):
+        errorFileList=[]
+        for i in range(0, self.last_index() + 1):
+            errorFileList.append(self.errorInfo[i][self.index('file')])
+        return errorFileList
+
+
 cv_series= 0
 
 def cv_show(*from_imgs, name="'L': next, 'A': back, 'E': exit"):
