@@ -2,6 +2,7 @@ from matplotlib import pyplot as plt
 from PIL.Image import frombytes
 import cv2
 import numpy as np
+from traceback import print_exc
 
 '''
     Toolkit for image process
@@ -12,15 +13,17 @@ import numpy as np
 '''
 
 class errorProcess(object):
-    def __init__(self):
+    def __init__(self, debug=False):
         # 动态生成错误类型统计表
-        self.errorType = ['NONE', 'FILE', 'IMAGE', 'WRITE']
-        self.errorCount = [0 for x in range(0, len(self.errorType))]
+        self.errorType = ['NONE', 'DIR', 'NAME', 'LOAD', 'ROTATE', 'STRETCH', 'THRESH', 'WRITE']
+        # recommend the name less than 8 characters
+        self.errorCount = [0]*len(self.errorType)
         # 形成一个由列表组成的有序字典
         self.__errorInfoName = ['tag', 'file', 'info']
         self.__errorLastInfoValue = [self.errorType[0], '', '']
         self.errorInfo = []
         self.errorTotalCount = 0
+        self.debug=debug
 
     def index(self, name):
         return self.__errorInfoName.index(name)
@@ -39,12 +42,15 @@ class errorProcess(object):
         return self.errorTotalCount-1
 
     def show(self, index):
-        print('[ERROR][%03d:%2d:%5s][Where]%s:[At]%s' %
-              (index + 1,
-               self.errorType.index(self.errorInfo[index][self.index('tag')]),
-               self.errorInfo[index][self.index('tag')],
-               self.errorInfo[index][self.index('file')],
-               repr(self.errorInfo[index][self.index('info')])))
+        if self.debug:
+            print_exc()
+        else:
+            print('[ERROR][%03d:%2d:%-7s][Where]%s:[At]%s' %
+                  (index + 1,
+                   self.errorType.index(self.errorInfo[index][self.index('tag')]),
+                   self.errorInfo[index][self.index('tag')],
+                   self.errorInfo[index][self.index('file')],
+                   repr(self.errorInfo[index][self.index('info')])))
 
     def show_all(self):
         for i in range(0,self.last_index()+1):
@@ -54,9 +60,14 @@ class errorProcess(object):
         self.show(self.last_index())
 
     def show_all_type(self):
-        for i in range(0, self.errorTotalCount):
-            if self.errorCount[i] != 0:
-                print(self.errorType[i] + ' error:' + str(self.errorCount[i]))
+        if not self.is_empty():
+            for i in range(0, len(self.errorCount)):
+                if self.errorCount[i] != 0:
+                    print(self.errorType[i].ljust(8,'-') + 'error:' + str(self.errorCount[i]))
+
+    def add_show(self, tagindex, file, info):
+        self.add(tagindex, file, info)
+        self.show_last()
 
     def is_empty(self):
         if self.errorTotalCount==0:
@@ -69,6 +80,14 @@ class errorProcess(object):
         for i in range(0, self.last_index() + 1):
             errorFileList.append(self.errorInfo[i][self.index('file')])
         return errorFileList
+
+    def error_code(self):
+        if self.errorTotalCount!=0:
+            errorCode=self.errorType.index(self.errorInfo[self.last_index()][self.index('tag')])
+            if errorCode==0:
+                errorCode=-1
+            return errorCode
+        return 0
 
 
 cv_series= 0
@@ -109,19 +128,14 @@ def cv_resize(from_img,max=800):
 
 
 def cv_BoxPoints(rect):
-    """
-    """
-    box= cv2.boxPoints(rect)
     #box = cv2.cv.BoxPoints(rect)  # for OpenCV 2.x
-    box= [np.int0(box)]
-    return box
+    return [np.int0(cv2.boxPoints(rect))]
 
 
 def plt_show(*from_imgs):
     """ Basic usage:plt_show(cv2_img),
         show a image with default name "Unnamed".
     """
-
     row_a= int(np.sqrt(len(from_imgs)))
     col_a= int(len(from_imgs)/row_a) + len(from_imgs)%row_a
     if row_a>col_a:
