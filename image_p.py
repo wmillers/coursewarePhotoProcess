@@ -46,41 +46,58 @@ def rotateProperly(img, angle=0):
 '''
 对ppt区域进行识别、还原原文变形
 '''
-
-def stretchProperly(img, max_size=1200):
+def stretchProperly(img, max_size=800):
     img_ratio, rsz_img = cv_resize(img,max_size)  # resize since image is huge
     #rsz_img=img # Block the change of resizing image
-    gray = cv2.cvtColor(rsz_img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
+    loop_count=0
+    while True:
+        if loop_count==0:
+            gray = cv2.cvtColor(rsz_img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
+        else:
+            gray= 255-gray
 
-    # threshold
-    retval, thresh_gray = cv2.threshold(gray, thresh=140, maxval=255, type=cv2.THRESH_BINARY)
+        # threshold
+        retval, thresh_gray = cv2.threshold(gray, thresh=140, maxval=255, type=cv2.THRESH_BINARY)
 
-    im2, contours, hierarchy = cv2.findContours(thresh_gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+        im2, contours, hierarchy = cv2.findContours(thresh_gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
-    # 寻找面积最大的区域
-    max_contour= max(contours, key=lambda x:abs(cv2.contourArea(x)))
+        # 寻找面积最大的区域
+        max_contour= max(contours, key=lambda x:abs(cv2.contourArea(x)))
+        # 发现黑板区，尝试反色识别
+        if abs(cv2.contourArea(max_contour))>=(len(gray)*0.6)**2:
+            loop_count+=1
+        if loop_count>=1: break
+        loop_count+=1
+    # 黑板区并且有与黑板直接连接的深色物体导致识别异常
+    assert abs(cv2.contourArea(max_contour)) < (len(gray)*0.9)**2,\
+        'Unable to deal with this image which may contain dark boards.'
 
     # 绘制近似四边形
     # 不能使用minAreaRect，其返回值是最小面积的矩形，
     # 与要求的四边形不符
     approx_points=cv2.approxPolyDP(max_contour,0.1 * cv2.arcLength(max_contour, True),True)
+    # 但是有时候这里只会包含一个点，或者多于四个点，因此前者只能用矩形解决
+    if len(approx_points)<4:approx_points=cv_BoxPoints(cv2.minAreaRect(max_contour))
 
     if dc:
         con_img=np.copy(rsz_img)
         cv2.drawContours(con_img, contours, -1, (0,255,255), 3)
         cv2.drawContours(con_img, cv_BoxPoints(cv2.minAreaRect(max_contour)), -1, (0,255,0), 2)
         # cv2.drawContours(con_img, approx_points, -1, (255,0,0), 1)
-        plt_show(con_img)
+        cv_show(con_img)
         del con_img
     # 计算拉伸后的矩形定位点并图形变换
-    M= cv2.getPerspectiveTransform(np.asarray(approx_points, np.float32),
-                                   np.asarray(corner_points(approx_points), np.float32))
+    stretched_points=stretch_points(approx_points)
+    M= cv2.getPerspectiveTransform(np.asarray(rearrange_points(approx_points), np.float32),
+                                   np.asarray(stretched_points, np.float32))
     dst= cv2.warpPerspective(rsz_img, M,
-                             (corner_points(approx_points)[2][0][0],
-                              corner_points(approx_points)[1][0][1]))
+                             (stretched_points[2][0][0],
+                              stretched_points[1][0][1]))
 
     if dc:plt_show(rsz_img, dst)
     return dst
+
+
 
 '''
 对指定区域（尽量保持纯色背景）的内容清晰化、二值化处理
