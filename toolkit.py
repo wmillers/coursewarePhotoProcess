@@ -129,7 +129,9 @@ def cv_resize(from_img,max=800):
 
 def cv_BoxPoints(rect):
     #box = cv2.cv.BoxPoints(rect)  # for OpenCV 2.x
-    return [np.int0(cv2.boxPoints(rect))]
+    rectPoints=np.int0(cv2.boxPoints(rect))
+    rectPoints=np.array([[rectPoints[x]] for x in range(0,4)])
+    return rectPoints
 
 
 def plt_show(*from_imgs):
@@ -234,7 +236,6 @@ def corner_points(points):
              3-c-2 <--max
     """
     distances=[cv2.norm(points[x]) for x in range(0, 4)]
-    transform_distance=[]
     points_index=[0, 1, 2, 3]
     arrange_points_index=[0]*4
 
@@ -250,7 +251,20 @@ def corner_points(points):
     else:
         arrange_points_index[3]=points_index[0]
         arrange_points_index[1]=points_index[1]
+    return arrange_points_index
 
+
+def rearrange_points(points):
+    '''
+    corner_points算出来的是顺时针的
+    '''
+    arrange_points_index=corner_points(points)
+    return [points[arrange_points_index[x]] for x in [0,3,2,1]]
+
+
+def stretch_points(points):
+    transform_distance = []
+    arrange_points_index=corner_points(points)
     line_length=[cv2.norm(points[arrange_points_index[0]][0],points[arrange_points_index[1]][0]),  # 0-a-1
                 cv2.norm(points[arrange_points_index[1]][0], points[arrange_points_index[2]][0]),  # 1-b-2
                 cv2.norm(points[arrange_points_index[2]][0], points[arrange_points_index[3]][0]),  # 2-c-3
