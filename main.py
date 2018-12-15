@@ -1,18 +1,24 @@
 import file_p, image_p
 from toolkit import errorProcess
 
-debug=False
-image_p.dc=False
+debug=True
+image_p.dc=True
 
 if debug:
     fileDir=''
     newFileDir=''
     copyError=False
+    ErrorAutoDetect=True
 else:
     # 用户输入
+    # 图片所在目录
     fileDir=input("File path(origin):")
-    newFileDir=input("File path(output):")  # 处理完成存放的文件夹，空表示存放在源文件目录内的output文件夹
+    # 处理完成存放的文件夹，空表示存放在源文件目录内的output文件夹
+    newFileDir=input("File path(output):")
+    # 是否要将处理失败的文件复制到指定的文件夹（/output/error/）
     copyError=True if input('Copy the original image when a error occured?(Y/N)').lower()=='y' else False
+    # 通常情况下可能会因为处理的区域比周围暗（如墙面）导致错误地识别了墙面
+    errorAutoDetect=True if input('Mark the images that is obviously handled incorrectly?(Y/N)').lower()=='y' else False
 
 print('=============')
 # 默认参数列表
@@ -42,19 +48,22 @@ for file in files:
         continue
 
     try:
-        dst= image_p.loadImgUnicode(filePath)
+        img= image_p.loadImgUnicode(filePath)
     except Exception as e:
         errorLog.add_show(3,file,e)
         continue
     try:
         angle=file_p.getExifOrientation(filePath)
         if angle!=0:
-            dst= image_p.rotateProperly(dst, angle)
+            dst= image_p.rotateProperly(img, angle)
     except Exception as e:
         errorLog.add_show(4,file,e)
         continue
     try:
         dst= image_p.stretchProperly(dst)
+    except AssertionError as e:
+        errorLog.add_show(5,file,e)
+        continue
     except Exception as e:
         errorLog.add_show(5,file,e)
         continue
