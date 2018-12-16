@@ -43,41 +43,79 @@ def rotateProperly(img, angle=0):
     return np.rot90(img, -int(angle/90))
 
 
+'''Background colour range'''
+def colourRange(img, tolerance=10, middle_area=0.5, erosion_count=5):
+    '''
+    Find dark-coloured background which is expected area
+    :param img: the image that contains hard-recognizable dark area
+    :param tolerance: allowed range of tolerance, recommended 0 to 50
+    :param middle_area: area for sample creation, below 1
+    :param erosion_count: iterations counts for erosion
+    :return: masked array with dtype=uint8
+    '''
+
+    sample=img[int(middle_area/2*img.shape[0]):img.shape[0]-int(middle_area/2*img.shape[0]),
+               int(middle_area/2*img.shape[1]):img.shape[1]-int(middle_area/2*img.shape[1])]
+    sample_bgr=np.asarray([sample[:,:,0],sample[:,:,1],sample[:,:,2]])
+    img_bgr=np.asarray([img[:,:,0],img[:,:,1],img[:,:,2]])
+    sample_mean=[]
+    sample_mean.append(int(np.mean(sample_bgr[0])))
+    sample_mean.append(int(np.mean(sample_bgr[1])))
+    sample_mean.append(int(np.mean(sample_bgr[2])))
+    mask_a=np.asarray([max(0,sample_mean[0]-tolerance)<=img_bgr[0],
+                       max(0,sample_mean[1] - tolerance) <= img_bgr[1],
+                       max(0,sample_mean[2] - tolerance) <= img_bgr[2]])
+    mask_b=np.asarray([img_bgr[0]<=min(255,sample_mean[0]+tolerance),
+                       img_bgr[1] <= min(255,sample_mean[1] + tolerance),
+                       img_bgr[2] <= min(255,sample_mean[2] + tolerance)])
+    mask=mask_a&mask_b
+    mask=np.asarray(mask[0]&mask[1]&mask[2],dtype=np.uint8)
+    '''
+    # 转为灰度图后运算效率会上升，但是会带来更大的干扰
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    sample_mean=np.mean(gray[int(middle_area/2*img.shape[0]):img.shape[0]-int(middle_area/2*img.shape[0]),
+                             int(middle_area/2*img.shape[1]):img.shape[1]-int(middle_area/2*img.shape[1])])
+    mask=np.asarray(sample_mean-tolerance<=gray)&np.asarray(gray<=sample_mean+tolerance)
+    mask=np.asarray(mask,dtype=np.uint8)'''
+    # ndimage也有这个函数
+    mask=cv2.erode(mask, np.ones((int(len(img)/300),int(len(img)/300))),iterations=erosion_count)
+    if dc:plt_show(mask)
+    return mask
+
+
+
 '''
 对ppt区域进行识别、还原原文变形
 '''
 def stretchProperly(img, max_size=800):
     img_ratio, rsz_img = cv_resize(img,max_size)  # resize since image is huge
     #rsz_img=img # Block the change of resizing image
-    loop_count=0
-    while True:
-        if loop_count==0:
-            gray = cv2.cvtColor(rsz_img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
-        else:
-            gray= 255-gray
 
-        # threshold
-        retval, thresh_gray = cv2.threshold(gray, thresh=140, maxval=255, type=cv2.THRESH_BINARY)
+    gray = cv2.cvtColor(rsz_img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
 
+    # threshold
+    retval, thresh_gray = cv2.threshold(gray, thresh=140, maxval=255, type=cv2.THRESH_BINARY)
+    for i in range(0,2):
         im2, contours, hierarchy = cv2.findContours(thresh_gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
         # 寻找面积最大的区域
         max_contour= max(contours, key=lambda x:abs(cv2.contourArea(x)))
         # 发现黑板区，尝试反色识别
-        if abs(cv2.contourArea(max_contour))>=(len(gray)*0.6)**2:
-            loop_count+=1
-        if loop_count>=1: break
-        loop_count+=1
+        if abs(cv2.contourArea(max_contour))<(len(gray)*0.6)**2:
+            thresh_gray=colourRange(rsz_img)
+        else:
+            break
+
     # 黑板区并且有与黑板直接连接的深色物体导致识别异常
-    assert abs(cv2.contourArea(max_contour)) < (len(gray)*0.9)**2,\
-        'Unable to deal with this image which may contain dark boards.'
+    assert abs(cv2.contourArea(max_contour)) < len(gray)*len(gray[0])*0.85**2,\
+        'This image may contain a continuous dark area.'
 
     # 绘制近似四边形
     # 不能使用minAreaRect，其返回值是最小面积的矩形，
     # 与要求的四边形不符
     approx_points=cv2.approxPolyDP(max_contour,0.1 * cv2.arcLength(max_contour, True),True)
-    # 但是有时候这里只会包含一个点，或者多于四个点，因此前者只能用矩形解决
-    if len(approx_points)<4:approx_points=cv_BoxPoints(cv2.minAreaRect(max_contour))
+    # 但是有时候这里只会包含一个点，或者多于四个点，目前只能用矩形解决
+    if len(approx_points)!=4:approx_points=cv_BoxPoints(cv2.minAreaRect(max_contour))
 
     if dc:
         con_img=np.copy(rsz_img)
