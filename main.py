@@ -1,8 +1,9 @@
 import file_p, image_p
 from toolkit import errorProcess
 
-debug=True
-image_p.dc=True
+debug=False
+#image_p.dc=True
+hard_count=0
 
 if debug:
     fileDir=''
@@ -22,7 +23,7 @@ else:
 
 print('=============')
 # 默认参数列表
-fileDir=r'C:\Users\Administrator\Desktop\m' if fileDir=='' else fileDir   # 待处理的图片所在的文件夹
+fileDir=r'C:\Users\Administrator\Desktop\p' if fileDir=='' else fileDir   # 待处理的图片所在的文件夹
 errorLog=errorProcess(debug)
 
 
@@ -60,15 +61,23 @@ for file in files:
         errorLog.add_show(4,file,e)
         continue
     try:
-        dst= image_p.stretchProperly(dst)
+        dst, hard_to_recognize= image_p.stretchProperly(dst)
     except AssertionError as e:
-        errorLog.add_show(5,file,e)
+        if str(e)!='This image may contain a continuous dark area.':
+            errorLog.add_show(5,file,e)
+        else:
+            errorLog.add_show(5,file,e)
         continue
     except Exception as e:
         errorLog.add_show(5,file,e)
         continue
     try:
-        dst= image_p.threshProperly(dst)
+        hard_to_recognize=True
+        if hard_to_recognize:
+            hard_count+=1
+            dst= image_p.threshBackground(dst)
+        else:
+            dst= image_p.threshProperly(dst)
     except Exception as e:
         errorLog.add_show(6,file,e)
         continue
@@ -89,5 +98,5 @@ if not errorLog.is_empty():
     print("Error/Total:"+str(errorLog.errorTotalCount)+'/'+str(len(files)))
 else:
     print('Done!')
-
+print(hard_count)
 exit(errorLog.error_code())
