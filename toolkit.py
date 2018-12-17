@@ -198,7 +198,7 @@ def del_isolatedot(square,nearby_ratio = 1/1000,white_ratio = 0.7,colour_ratio=1
         and both three ratios should be positive integer
         which is less than or equal to 1.
 
-        USELESS BY NOW, but the experience learnt from here is useful.
+        USELESS BY NOW, please use filter_isolated_cells(array, struct) instead.
     """
     square=np.copy(square)
     # black = 0
@@ -216,7 +216,6 @@ def del_isolatedot(square,nearby_ratio = 1/1000,white_ratio = 0.7,colour_ratio=1
                 square[x - colournearby:x + colournearby + 1, y - colournearby:y + colournearby + 1] = white
     print(j,"/",i)
     return square
-
 
 
 def prints(*datas):
