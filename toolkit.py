@@ -44,13 +44,12 @@ class errorProcess(object):
     def show(self, index):
         if self.debug:
             print_exc()
-        else:
-            print('[ERROR][%03d:%2d:%-7s][Where]%s:[At]%s' %
-                  (index + 1,
-                   self.errorType.index(self.errorInfo[index][self.index('tag')]),
-                   self.errorInfo[index][self.index('tag')],
-                   self.errorInfo[index][self.index('file')],
-                   repr(self.errorInfo[index][self.index('info')])))
+        print('[ERROR][%03d:%2d:%-7s][Where]%s:[At]%s' %
+              (index + 1,
+               self.errorType.index(self.errorInfo[index][self.index('tag')]),
+               self.errorInfo[index][self.index('tag')],
+               self.errorInfo[index][self.index('file')],
+               repr(self.errorInfo[index][self.index('info')])))
 
     def show_all(self):
         for i in range(0,self.last_index()+1):
@@ -81,6 +80,11 @@ class errorProcess(object):
             errorFileList.append(self.errorInfo[i][self.index('file')])
         return errorFileList
 
+    def show_error_file_list(self):
+        for file in self.error_file_list():
+            print(file)
+
+
     def error_code(self):
         if self.errorTotalCount!=0:
             errorCode=self.errorType.index(self.errorInfo[self.last_index()][self.index('tag')])
@@ -88,6 +92,11 @@ class errorProcess(object):
                 errorCode=-1
             return errorCode
         return 0
+
+    def error_exit(self):
+        print('Exiting...')
+        exit(self.error_code())
+
 
 
 cv_series= 0
@@ -259,6 +268,63 @@ def rearrange_points(points):
     '''
     arrange_points_index=corner_points(points)
     return [points[arrange_points_index[x]] for x in [0,3,2,1]]
+
+
+def near_line(points, baseline, deviation=0):
+    distance=[]
+    for point in points:
+        distance.append(abs(point-baseline))
+    i=distance.index(min(distance))
+    if deviation!=0 and i>=deviation and i<=len(distance)-deviation-1:
+        if points[i-1]<points[i]:
+            i+=deviation
+        else:
+            i-=deviation
+    return i
+
+
+def is_dark_board(img, middle_area=0.6):
+    dark_line=110
+    sample=img[int(middle_area/2*img.shape[0]):img.shape[0]-int(middle_area/2*img.shape[0]),
+               int(middle_area/2*img.shape[1]):img.shape[1]-int(middle_area/2*img.shape[1])]
+    gray = cv2.cvtColor(sample, cv2.COLOR_BGR2GRAY)
+    mean=np.mean(gray)
+    if mean<=dark_line:
+        return True
+    else:
+        return False
+
+
+def is_monotony_points(points, strict=False):
+    if not strict:
+        scale=abs((max(points)-min(points))/16)
+    else:
+        scale=0
+    old_increase=increase=True
+    first_change=True
+    for i in range(0,len(points)):
+        if i==0:
+            continue
+        if abs(points[i]-points[i-1])<=scale:
+            continue
+        elif points[i]>points[i-1]:
+            if first_change:
+                first_change=False
+                old_increase=increase=True
+            else:
+                increase=True
+        elif points[i]<points[i-1]:
+            if first_change:
+                first_change=False
+                old_increase=increase=False
+            else:
+                increase=False
+        if old_increase!=increase:
+            return False
+    if old_increase != increase:
+        return False
+    return True
+
 
 
 def stretch_points(points):
