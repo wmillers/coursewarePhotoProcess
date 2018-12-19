@@ -1,5 +1,7 @@
 import exifread
+import numpy as np
 import os, time, shutil
+from datetime import datetime
 
 '''
     获取文件夹中的文件信息，并依次传递入
@@ -101,6 +103,12 @@ def reconstrut_filename(filePath, newPath=''):
     return new_name
 
 
+def deconstruct_dirfile_rename(fileDir):
+    root, files=fileDirList(fileDir)
+    for file in files:
+        deconstruct_file='_'.join(file.split('_')[3:])
+        os.rename(root+'\\'+file, root+'\\'+deconstruct_file)
+
 
 def fileDirList(fileDir):
     for root, dirs, files in os.walk(fileDir):break
@@ -113,8 +121,8 @@ def newFilePath(root, newPath='', relaPath='output'):
     if newPath=='':
         newPath=root+'\\'+relaPath+'\\'
     elif not os.path.isabs(newPath):raise Exception("You should use absolute path, not '"+newPath+"'")
-    if not os.path.exists(newPath):os.mkdir(newPath)
-    return newPath
+    if not os.path.exists(newPath):os.makedirs(newPath)
+    return delEndSlash(newPath)
 
 
 def copyFiles(root, newPath, fileList):
@@ -124,6 +132,79 @@ def copyFiles(root, newPath, fileList):
         shutil.copy(root+file,newPath+file)
 
 
+class course_time(object):
+    course_list = [{'name': '信息论',
+                    'week': [1],
+                    'time': [[1, 2]]},
+                   {'name': '自动化',
+                    'week': [4, 5],
+                    'time': [[1, 2], [3, 4]]},
+                   {'name': '通信',
+                    'week': [2],
+                    'time': [[1, 2]]},
+                   {'name': '轨道',
+                    'week': [3],
+                    'time': [[1, 2, 3, 5, 6]]}]
+
+    ctime_start = np.array([[8, 30], [9, 25], [10, 20], [11, 15],
+                            [13, 30], [14, 25], [15, 20], [16, 15]])
+    __ctime_h = ctime_start[:, 0].tolist()
+    __ctime_m = ctime_start[:, 1].tolist()
+    ctime_h_min=min(__ctime_h)
+    ctime_h_max=max(__ctime_h)+1
+
+    Undefined='Unknown'
+    course_filename={x['name']:[] for x in course_list}
+    course_filename[Undefined]=[]
+
+    def __init__(self, fileOldPath, relaNewPath='output'):
+        self.fileOldPath=delEndSlash(fileOldPath)
+        self.newPath=delEndSlash(relaNewPath)
+        self.files = fileDirList(self.fileOldPath)[1]
+        pass
+
+    def timeFileName_read(self, filename):
+        autofill = 100
+        fileTime = {'week': autofill,
+                    'hour': autofill,
+                    'minute': autofill,
+                    'second': autofill, }
+        re = filename.split('_')
+        fileTime['week'] = datetime.strptime(re[0], '%Y%m%d').weekday() + 1
+        fileTime['hour'] = datetime.strptime(re[1], '%H%M%S').hour
+        fileTime['minute'] = datetime.strptime(re[1], '%H%M%S').minute
+        fileTime['second'] = datetime.strptime(re[1], '%H%M%S').second
+        return fileTime
+
+    def course_time(self, fileTime):
+        number = 0
+        course_name = self.Undefined
+        for course in self.course_list:
+            if fileTime['week'] in course['week']:
+                day = course['time'][course['week'].index(fileTime['week'])]
+                if self.ctime_h_min <= fileTime['hour'] < self.ctime_h_max:
+                    if fileTime['minute'] >= self.__ctime_m[self.__ctime_h.index(fileTime['hour'])]:
+                        number = self.__ctime_h.index(fileTime['hour']) + 1
+                    else:
+                        number = self.__ctime_h.index(fileTime['hour'])
+            if number != 0:
+                if number in day:
+                    course_name = course['name']
+                    break
+        if number == 0: course_name = self.Undefined
+        return course_name
+
+    def fileNameRender(self, course_name, filename):
+        filePath = self.fileOldPath + '\\' + filename
+        fileNewPath = self.newPath + '\\' + course_name + '\\' + filename
+        return delEndSlash(filePath), delEndSlash(fileNewPath)
+
+    def process(self):
+        for file in self.files:
+            fileTime = self.timeFileName_read(file)
+            course_name = self.course_time(fileTime)
+            self.course_filename[course_name].append(file)
+        return self.course_filename
 
 if __name__=='__main__':
     fileDirList("C:\\Users\\Administrator\\Desktop\\Documents\\python_work\\cours_image\\im")
