@@ -5,7 +5,7 @@ from toolkit import errorProcess,plt_show,cv_show
 快速测试单张图片
 '''
 error=errorProcess(True)
-filePath='C:\\Users\\Administrator\\Desktop\\m\\12.jpg'
+filePath='C:\\Users\\Administrator\\Desktop\\m\\2.jpg'
 file=filePath
 dst=[]
 #image_p.dc=True
@@ -29,6 +29,7 @@ try:
 except Exception as e:
     error.add_show(0,filePath,e)
 # image_p.writeImg('C:\\Users\\Administrator\\Desktop\\OutPUTa.jpg',dst2)
+plt_show(dst[len(dst)-1])
 plt_show(img,*dst)
 cv_show(dst[len(dst)-1])
 pass

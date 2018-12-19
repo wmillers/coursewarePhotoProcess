@@ -4,6 +4,7 @@
     <list default="true" id="a1441641-fcb4-4837-b9d9-c6cdcade7a5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example.py" beforeDir="false" afterPath="$PROJECT_DIR$/example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_p.py" beforeDir="false" afterPath="$PROJECT_DIR$/file_p.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image_p.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_p.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/toolkit.py" beforeDir="false" afterPath="$PROJECT_DIR$/toolkit.py" afterDir="false" />
@@ -16,9 +17,10 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/cours_image$file_p.coverage" NAME="file_p Coverage Results" MODIFIED="1543590930305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/cours_image$main.coverage" NAME="main Coverage Results" MODIFIED="1545029295386" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/cours_image$course_time.coverage" NAME="course_time Coverage Results" MODIFIED="1545225728605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/cours_image$main.coverage" NAME="main Coverage Results" MODIFIED="1545230551688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cours_image$test.coverage" NAME="test Coverage Results" MODIFIED="1542634910413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/cours_image$example.coverage" NAME="example Coverage Results" MODIFIED="1545053095541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/cours_image$example.coverage" NAME="example Coverage Results" MODIFIED="1545231767069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cours_image$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1542384347304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/cours_image$image_p.coverage" NAME="image_p Coverage Results" MODIFIED="1543733405847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -40,43 +42,45 @@
     <session id="-34981588">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.43" value="2" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.56" value="2" />
+          <entry key="project.open.time.59" value="1" />
           <entry key="project.open.time.60" value="1" />
           <entry key="project.open.time.61" value="1" />
           <entry key="project.open.time.67" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.open.time.96" value="1" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="example" value="25" />
           <entry key="main" value="10" />
-          <entry key="py" value="30055" />
+          <entry key="py" value="37350" />
           <entry key="test2" value="28" />
-          <entry key="txt" value="1065" />
+          <entry key="txt" value="1152" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="1065" />
-          <entry key="Python" value="30118" />
+          <entry key="PLAIN_TEXT" value="1152" />
+          <entry key="Python" value="37413" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="27" />
+          <entry key="py" value="30" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="27" />
+          <entry key="Python" value="30" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -84,14 +88,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="247">
+              <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
-                <marker date="1545023470677" expanded="true" signature="802:805" ph="..." />
+                <marker date="1545232372360" expanded="true" signature="1282:1285" ph="..." />
               </folding>
             </state>
           </provider>
@@ -100,13 +104,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/file_p.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1273">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="285">
+              <caret line="105" column="30" selection-start-line="105" selection-start-column="4" selection-end-line="105" selection-end-column="30" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <marker date="1544682483847" expanded="true" signature="332:419" ph="..." />
-                <marker date="1544682483847" expanded="true" signature="1025:1028" ph="..." />
-                <marker date="1544682483847" expanded="true" signature="1513:1515" ph="..." />
+                <marker date="1545231726575" expanded="true" signature="381:468" ph="..." />
+                <marker date="1545231726575" expanded="true" signature="1074:1077" ph="..." />
+                <marker date="1545231726575" expanded="true" signature="1562:1564" ph="..." />
+                <marker date="1545231726575" expanded="true" signature="2840:3020" ph="..." />
+                <marker date="1545231726575" expanded="true" signature="6428:6437" ph="..." />
               </folding>
             </state>
           </provider>
@@ -115,11 +121,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolkit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="136" column="13" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
+            <state relative-caret-position="532">
+              <caret line="108" column="17" lean-forward="true" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
-                <marker date="1545042037469" expanded="true" signature="830:884" ph="..." />
+                <marker date="1545229765290" expanded="true" signature="830:884" ph="..." />
+                <marker date="1545229765290" expanded="true" signature="2702:2777" ph="..." />
+                <marker date="1545229765290" expanded="true" signature="3062:3067" ph="..." />
               </folding>
             </state>
           </provider>
@@ -128,23 +136,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/image_p.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="297" column="41" selection-start-line="297" selection-start-column="41" selection-end-line="297" selection-end-column="41" />
+            <state relative-caret-position="197">
+              <caret line="248" column="42" selection-start-line="248" selection-start-column="42" selection-end-line="248" selection-end-column="42" />
               <folding>
-                <marker date="1545052922382" expanded="true" signature="354:590" ph="..." />
-                <marker date="1545052922382" expanded="true" signature="814:1020" ph="..." />
-                <marker date="1545052922382" expanded="true" signature="1080:3545" ph="..." />
-                <marker date="1545052922382" expanded="true" signature="8184:11284" ph="..." />
+                <marker date="1545232222516" expanded="true" signature="354:590" ph="..." />
+                <marker date="1545232222516" expanded="true" signature="814:1020" ph="..." />
+                <marker date="1545232222516" expanded="true" signature="1080:3890" ph="..." />
+                <marker date="1545232222516" expanded="true" signature="3586:3890" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+            <state relative-caret-position="95">
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -171,7 +179,28 @@
       <find>newPath</find>
       <find>dst_</find>
       <find>getExif</find>
+      <find>dc=True</find>
+      <find>255-img</find>
+      <find>monotony_points</find>
+      <find>colourRange</find>
+      <find>is_dark_board</find>
+      <find>k</find>
+      <find>_k</find>
+      <find>maskedThresh</find>
+      <find>near_line</find>
+      <find>spli</find>
+      <find>os.rename</find>
+      <find>move</find>
+      <find>reconstrut_filename</find>
+      <find>shutil</find>
+      <find>newFilePath</find>
+      <find>_,</find>
+      <find>outp</find>
+      <find>cop</find>
     </findStrings>
+    <replaceStrings>
+      <replace>__ctime_h</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -181,11 +210,12 @@
       <list>
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/test2.py" />
-        <option value="$PROJECT_DIR$/file_p.py" />
-        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/course_time.py" />
         <option value="$PROJECT_DIR$/toolkit.py" />
-        <option value="$PROJECT_DIR$/image_p.py" />
+        <option value="$PROJECT_DIR$/file_p.py" />
         <option value="$PROJECT_DIR$/example.py" />
+        <option value="$PROJECT_DIR$/image_p.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -217,7 +247,20 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="cours_image" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cours_image" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -254,6 +297,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="course_time" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="cours_image" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\Administrator\Desktop\Documents\python_work\cours_image\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/course_time.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -347,42 +409,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="cours_image" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Administrator\Desktop\Documents\python_work\cours_image\venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.file_p" />
       <item itemvalue="Python.image_p" />
       <item itemvalue="Python.example" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.course_time" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.example" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.example" />
+        <item itemvalue="Python.course_time" />
         <item itemvalue="Python.image_p" />
         <item itemvalue="Python.file_p" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -544,7 +584,28 @@
       <option name="project" value="LOCAL" />
       <updated>1544961849899</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="easier to debug">
+      <created>1545053176491</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1545053176491</updated>
+    </task>
+    <task id="LOCAL-00023" summary="updates">
+      <created>1545053213885</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1545053213885</updated>
+    </task>
+    <task id="LOCAL-00024" summary="add a new way to thresh images beased on colour range">
+      <created>1545053253744</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1545053253744</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView">
@@ -558,27 +619,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.12864077" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12846482" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.42725173" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6003236" visible="true" weight="0.38503253" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5517058" weight="0.38503253" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3290993" />
+      <window_info active="true" anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" visible="true" weight="0.3286334" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.46268657" side_tool="true" weight="0.3394794" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.55383795" weight="0.3286334" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.53731346" weight="0.3394794" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.47121534" side_tool="true" weight="0.3391116" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.5501066" weight="0.3286334" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.52878463" weight="0.3383948" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" x="366" y="294" width="882" height="623" id="SciView" order="3" visible="true" weight="0.40778252" />
+      <window_info anchor="right" x="366" y="294" width="882" height="623" id="SciView" order="3" weight="0.40778252" />
       <window_info anchor="right" id="Database" order="4" weight="0.32928804" />
       <window_info anchor="right" x="0" y="0" width="274" height="800" id="Documentation" order="5" side_tool="true" weight="0.32928804" />
     </layout>
@@ -630,17 +692,29 @@
     <MESSAGE value="quick test for a single file" />
     <MESSAGE value="add new option for users" />
     <MESSAGE value="fix bugs which may stretch images in wrong direction" />
-    <MESSAGE value="updates" />
     <MESSAGE value="improve the effiency of finding dark-coloured background to locate the expected area" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve the effiency of finding dark-coloured background to locate the expected area" />
+    <MESSAGE value="easier to debug" />
+    <MESSAGE value="updates" />
+    <MESSAGE value="add a new way to thresh images beased on colour range" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a new way to thresh images beased on colour range" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/example.py</url>
-          <line>33</line>
+          <line>34</line>
           <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/image_p.py</url>
+          <line>148</line>
+          <option name="timeStamp" value="210" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/example.py</url>
+          <line>6</line>
+          <option name="timeStamp" value="308" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -654,6 +728,42 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>plt_show(dst)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>con_img=np.copy(rsz_img)
+cv2.drawContours(con_img, contours, -1, (0,255,255), 3)
+cv2.drawContours(con_img, cv_BoxPoints(cv2.minAreaRect(max_contour)), -1, (0,255,0), 2)
+# cv2.drawContours(con_img, approx_points, -1, (255,0,0), 1)
+cv_show(con_img)
+del con_img</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>con_img=np.copy(rsz_img)
+    cv2.drawContours(con_img, contours, -1, (0,255,255), 3)
+    cv2.drawContours(con_img, cv_BoxPoints(cv2.minAreaRect(max_contour)), -1, (0,255,0), 2)
+    # cv2.drawContours(con_img, approx_points, -1, (255,0,0), 1)
+    cv_show(con_img)
+    del con_img</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>if dc:
+    con_img=np.copy(rsz_img)
+    cv2.drawContours(con_img, contours, -1, (0,255,255), 3)
+    cv2.drawContours(con_img, cv_BoxPoints(cv2.minAreaRect(max_contour)), -1, (0,255,0), 2)
+    # cv2.drawContours(con_img, approx_points, -1, (255,0,0), 1)
+    cv_show(con_img)
+    del con_img</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>img[int(middle_area/2*img.shape[0]):img.shape[0]-int(middle_area/2*img.shape[0]),
                int(middle_area/2*img.shape[1]):img.shape[1]-int(middle_area/2*img.shape[1]),[1]]</expression-string>
@@ -675,52 +785,47 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>cv_show(gray)</expression-string>
+        <expression-string>cour_list.course_list[1]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>plt_show(corner_area[12])</expression-string>
+        <expression-string>cour_list.course_list[3]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>~(~outside_ellipse &amp; ~mask[12])==(outside_ellipse | mask[12])</expression-string>
+        <expression-string>cour_list.course_list[2]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>plt_show(mask[12])</expression-string>
+        <expression-string>key,value in a.course_filename.items()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.asarraplt_show(corner_area[12])</expression-string>
+        <expression-string>a.course_filename.items()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.asarray([[True,True]])&amp;np.asarray([False,True])</expression-string>
+        <expression-string>self.course_filename</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.asarray([[True,False]])&amp;np.asarray([False,True])</expression-string>
+        <expression-string>self.course_filename[course_name]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.asarray([True,False])&amp;np.asarray([False,True])</expression-string>
+        <expression-string>self.course_filename[course_name].append(file)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.asarray([True,False])&amp;np.asarray([False,False])</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>mask_mean_k.index(min(mask_mean_k))</expression-string>
+        <expression-string>ctime_h.index(fileTime['hour'])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -790,60 +895,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/file_p.py">
+    <entry file="file://$PROJECT_DIR$/course_time.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1544682483847" expanded="true" signature="332:419" ph="..." />
-            <marker date="1544682483847" expanded="true" signature="1025:1028" ph="..." />
-            <marker date="1544682483847" expanded="true" signature="1513:1515" ph="..." />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/toolkit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="136" column="13" selection-start-line="136" selection-start-column="13" selection-end-line="136" selection-end-column="13" />
+        <state relative-caret-position="532">
+          <caret line="108" column="17" lean-forward="true" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="17" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
-            <marker date="1545042037469" expanded="true" signature="830:884" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <marker date="1545023470677" expanded="true" signature="802:805" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/image_p.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="297" column="41" selection-start-line="297" selection-start-column="41" selection-end-line="297" selection-end-column="41" />
-          <folding>
-            <marker date="1545052922382" expanded="true" signature="354:590" ph="..." />
-            <marker date="1545052922382" expanded="true" signature="814:1020" ph="..." />
-            <marker date="1545052922382" expanded="true" signature="1080:3545" ph="..." />
-            <marker date="1545052922382" expanded="true" signature="8184:11284" ph="..." />
+            <marker date="1545229765290" expanded="true" signature="830:884" ph="..." />
+            <marker date="1545229765290" expanded="true" signature="2702:2777" ph="..." />
+            <marker date="1545229765290" expanded="true" signature="3062:3067" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        <state relative-caret-position="95">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_p.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="105" column="30" selection-start-line="105" selection-start-column="4" selection-end-line="105" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1545231726575" expanded="true" signature="381:468" ph="..." />
+            <marker date="1545231726575" expanded="true" signature="1074:1077" ph="..." />
+            <marker date="1545231726575" expanded="true" signature="1562:1564" ph="..." />
+            <marker date="1545231726575" expanded="true" signature="2840:3020" ph="..." />
+            <marker date="1545231726575" expanded="true" signature="6428:6437" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image_p.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="248" column="42" selection-start-line="248" selection-start-column="42" selection-end-line="248" selection-end-column="42" />
+          <folding>
+            <marker date="1545232222516" expanded="true" signature="354:590" ph="..." />
+            <marker date="1545232222516" expanded="true" signature="814:1020" ph="..." />
+            <marker date="1545232222516" expanded="true" signature="1080:3890" ph="..." />
+            <marker date="1545232222516" expanded="true" signature="3586:3890" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <marker date="1545232372360" expanded="true" signature="1282:1285" ph="..." />
           </folding>
         </state>
       </provider>
