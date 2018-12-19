@@ -85,45 +85,71 @@ def colourRange(img, tolerance=10, deviation=5, middle_area=0.5, erosion_count=5
         mask=cv2.erode(mask, np.ones((int(len(img)/300),int(len(img)/300))),iterations=erosion_count)
     else:
         mask = np.asarray(mask[0] & mask[1] & mask[2])
+    #dc=True
     if dc:plt_show(mask)
     return mask
 
+
+def maskedThresh(img, mask):
+    tolerance=int(np.mean(img[~mask]))-40
+    tolerance=tolerance if tolerance<=255 else 255
+    #mask_a=~(~mask&(img>=tolerance))
+    mask_a=~((img>=tolerance)&(~mask))
+    img[~mask_a]=255
+    #masked_img=np.ma.array(img, mask=mask_a)
+    #masked_img[mask]=255
+    if dc:plt_show(img)
+    return img
 
 '''
 对ppt区域进行识别、还原原文变形
 '''
 def stretchProperly(img, max_size=1200):
     hard_to_recognize=False
+    j=25
+    max_i=10
     img_ratio, rsz_img = cv_resize(img,max_size)  # resize since image is huge
     #rsz_img=img # Block the change of resizing image
 
     gray = cv2.cvtColor(rsz_img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
-
-    # threshold
-    retval, thresh_gray = cv2.threshold(gray, thresh=140, maxval=255, type=cv2.THRESH_BINARY)
-    for i in range(0,2):
+    if not is_dark_board(rsz_img):
+        # threshold
+        retval, thresh_gray = cv2.threshold(gray, thresh=140, maxval=255, type=cv2.THRESH_BINARY)
+    else:
+        thresh_gray=colourRange(rsz_img)
+        j+=10
+        max_i-=1
+    for i in range(0,max_i):
         im2, contours, hierarchy = cv2.findContours(thresh_gray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
         # 寻找面积最大的区域
-        max_contour= max(contours, key=lambda x:abs(cv2.contourArea(x)))
-        # 发现黑板区，尝试反色识别
-        if abs(cv2.contourArea(max_contour))<(len(gray)*0.6)**2:
-            thresh_gray=colourRange(rsz_img)
-            hard_to_recognize=True
+        empty=False
+        if contours!=[]:
+            max_contour= max(contours, key=lambda x:abs(cv2.contourArea(x)))
+            # 绘制近似四边形
+            # 不能使用minAreaRect，其返回值是最小面积的矩形，
+            # 与要求的四边形不符
+            approx_points = cv2.approxPolyDP(max_contour, 0.1 * cv2.arcLength(max_contour, True), True)
+            # 但是有时候这里只会包含一个点，或者多于四个点，目前只能用矩形解决
+            if len(approx_points) != 4: approx_points = cv_BoxPoints(cv2.minAreaRect(max_contour))
+        else:
+            empty=True
+        if empty or abs(cv2.contourArea(approx_points))<(len(gray)*0.6)**2:
+            if not hard_to_recognize:
+                thresh_gray=colourRange(rsz_img)
+                hard_to_recognize=True
+            else:
+                # 尝试容错率更高的参数
+                thresh_gray = colourRange(rsz_img, tolerance=j, erosion_count=8)
+                j+=10
         else:
             break
 
-    """# 黑板区并且有与黑板直接连接的相近颜色物体导致识别异常
-    assert abs(cv2.contourArea(max_contour)) < len(gray)*len(gray[0])*0.85**2,\
-        'This image may contain a continuous dark area.'"""
+    # 识别结果区域过小，识别失败
+    assert abs(cv2.contourArea(approx_points))>=(len(gray)*0.5)**2,\
+        'Unable to recognize the valid area, size of the result is too small.'
 
-    # 绘制近似四边形
-    # 不能使用minAreaRect，其返回值是最小面积的矩形，
-    # 与要求的四边形不符
-    approx_points=cv2.approxPolyDP(max_contour,0.1 * cv2.arcLength(max_contour, True),True)
-    # 但是有时候这里只会包含一个点，或者多于四个点，目前只能用矩形解决
-    if len(approx_points)!=4:approx_points=cv_BoxPoints(cv2.minAreaRect(max_contour))
-
+    #dc=True
     if dc:
         con_img=np.copy(rsz_img)
         cv2.drawContours(con_img, contours, -1, (0,255,255), 3)
@@ -216,11 +242,14 @@ means printable colour, fidelity and a proper size.
 
 Ideal thresh(most) is 150~190
 '''
-def threshBackground(img, tolerance=14, limit=0.4, area=2):
+def threshBackground(img, tolerance=14, limit=0.3, area=3):
     # limit:[0.3,0.6]
     # 此处逻辑类似于threshProperly中的
-    mask = []
+    #TODO(WJ):detect the background type(dark/light); improve the detection qulity
+    #TODO(WJ):最好的办法是一开始就分离深背景浅背景，整体不走同一套参数
     # usm
+    if is_dark_board(img):
+        img=255-img
     gauss_img=cv2.GaussianBlur(img, (0,0), 3)
     img = cv2.addWeighted(img, 1.5, gauss_img, -0.5, 0)
     img=cv2.addWeighted(img, 1.5, gauss_img, -0.5, 0)
@@ -255,36 +284,37 @@ def threshBackground(img, tolerance=14, limit=0.4, area=2):
                                     [img_x, img_y])
     #不同过滤值下的图片
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # convert to grayscale
-    corner_area=[]
+    mask = []
+    corner_mask=[]
     corner_mean=[]
-    j=0
+    i=j=0
     # 10~40
     for i in range(10,40):
         mask.append(colourRange(img, tolerance=i, middle_area=0, erosion_count=0))
         # ~(~A~B)=A+B
-        corner_area.append(np.ma.array(gray,mask=outside_ellipse|mask[len(mask)-1]))
-        corner_mean.append(corner_area[j].mean()/white)
-        '''if(j>0 and corner_mean[j]<=0.5 and corner_mean[j-1]>0.5):
-            del corner_area[j]
-            del corner_mean[j]
-            break'''
+        corner_mask.append(outside_ellipse|mask[len(mask)-1])
+        corner_mean.append(gray[corner_mask[j]].mean()/white)
         j+=1
-    if dc:plt_dotshow(corner_mean)
-    corner_mean=np.array(corner_mean)
-    corner_baseline=corner_mean.max()-(corner_mean.max()-corner_mean.min())*limit
-    corner_baseline=0.85 if corner_baseline>0.85 else corner_baseline    #尽量保持最多的信息量
-    for i in range(0,len(corner_mean)):
-        if(corner_mean[i]<corner_baseline):
-            if(i>0):
-                i-=1
-            break
     if dc:
-        print(i, ',', corner_baseline)
-        plt_show(*corner_area[:4])
+
+        plt_dotshow(corner_mean)
+    corner_mean=np.array(corner_mean)
+    if is_monotony_points(corner_mean):
+        corner_baseline=corner_mean.max()-(corner_mean.max()-corner_mean.min())*limit
+        corner_baseline=0.85 if corner_baseline>0.85 else corner_baseline    #尽量保持最多的信息量
+        i=near_line(corner_mean, corner_baseline, 2)
+    else:
+        corner_mean_k = np.asarray([corner_mean[k] - corner_mean[k - 1] for k in range(1, len(corner_mean))])
+        if dc:plt_dotshow(corner_mean_k)
+        i=near_line(corner_mean_k,corner_mean_k.min())
+        corner_baseline=(corner_mean_k[i]+corner_mean_k[i:].max())/2
+        i=near_line(corner_mean_k,corner_baseline)
+    if dc:print(i, ',', corner_baseline)
 
     #result_img=np.zeros((len(mask[0]),len(mask[0][0])),dtype=np.uint8)
     #img[mask[mask_mean_k.index(min(mask_mean_k))]]=255
     gray[mask[i]]=255
+    gray=maskedThresh(gray, outside_ellipse)
     '''gray_c=[]
     for gamma in [x/10 for x in range(0,10)]:
         gray_c.append(np.round((gray/255)**gamma*255).astype(np.uint8))
@@ -302,6 +332,8 @@ def threshBackground(img, tolerance=14, limit=0.4, area=2):
     mmask=mmask_a&mmask_b
     gray[mmask]-=beta
     gray=gray.astype(np.uint8)
+    mean=int(np.mean(gray[gray!=255])+45)
+    gray[gray>=mean]=255
     if dc:plt_show(gray)
     return gray
 
