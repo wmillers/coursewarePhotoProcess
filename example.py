@@ -4,6 +4,7 @@ from toolkit import errorProcess,plt_show,cv_show
 '''
 快速测试单张图片
 '''
+#file_p.deconstruct_dirfile_rename(r'C:\Users\Administrator\Desktop\p')
 error=errorProcess(True)
 filePath='C:\\Users\\Administrator\\Desktop\\m\\2.jpg'
 file=filePath
