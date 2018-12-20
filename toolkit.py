@@ -11,11 +11,22 @@ from traceback import print_exc
     过程打包，主要用于图像的处理和输出，
     使用的库为cv2,matplotlib,PIL,numpy
 '''
+class count_show(object):
+    def __init__(self, start=0):
+        self.count=start
+
+    def add(self, add=1):
+        self.count+=add
+
+    def add_show(self, start='\r', end=''):
+        self.add()
+        print(start+str(self.count), end=end)
+
 
 class errorProcess(object):
     def __init__(self, debug=False):
         # 动态生成错误类型统计表
-        self.errorType = ['NONE', 'DIR', 'NAME', 'LOAD', 'ROTATE', 'STRETCH', 'THRESH', 'WRITE']
+        self.errorType = ['NONE', 'DIR', 'NAME', 'LOAD', 'ROTATE', 'STRETCH', 'THRESH', 'WRITE', 'CLEAN']
         # recommend the name less than 8 characters
         self.errorCount = [0]*len(self.errorType)
         # 形成一个由列表组成的有序字典
@@ -97,7 +108,11 @@ class errorProcess(object):
         print('Exiting...')
         exit(self.error_code())
 
-
+def is_ascii(file):
+    if file==file.encode('ascii', 'ignore').decode('ascii'):
+        return True
+    else:
+        return False
 
 cv_series= 0
 
