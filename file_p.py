@@ -70,7 +70,7 @@ def get_FileCreateTime(filePath, asfilename=False):
     return TimeStampToTime(t, asfilename)
 
 
-def reconstrut_filename(filePath, newPath=''):
+def reconstrut_filename(filePath, newPath='', withPath=True):
     '''
     Due to the way Windows and Linux contruct the path differently,
     this function only works on Windows(r"C:\1\1",r"\root\1").
@@ -100,14 +100,27 @@ def reconstrut_filename(filePath, newPath=''):
         if not os.path.exists(new_name):break
         duplicated+=1
     if duplicated>9:raise FileExistsError
-    return new_name
+    if withPath:
+        return new_name
+    else:
+        return (fname_p2+'_'+symbol_code+str(duplicated)+'_'+oname_p3)
+
+
+
+def decontruct_filename(file):
+    if len(file.split('_')) > 3:
+        return '_'.join(file.split('_')[3:])
+    else:
+        return file
+
 
 
 def deconstruct_dirfile_rename(fileDir):
     root, files=fileDirList(fileDir)
     for file in files:
-        deconstruct_file='_'.join(file.split('_')[3:])
-        os.rename(root+'\\'+file, root+'\\'+deconstruct_file)
+        if len(file.split('_'))>3:
+            deconstruct_file=decontruct_filename(file)
+            os.rename(root+'\\'+file, root+'\\'+deconstruct_file)
 
 
 def fileDirList(fileDir):
@@ -157,10 +170,16 @@ class course_time(object):
     course_filename={x['name']:[] for x in course_list}
     course_filename[Undefined]=[]
 
-    def __init__(self, fileOldPath, relaNewPath='output'):
+    def __init__(self, fileOldPath, relaNewPath='output', files=[]):
         self.fileOldPath=delEndSlash(fileOldPath)
         self.newPath=delEndSlash(relaNewPath)
-        self.files = fileDirList(self.fileOldPath)[1]
+        if files==[]:
+            self.files = fileDirList(self.fileOldPath)[1]
+            self.filenameChanged=True
+        else:
+            self.files=files
+            #self.oldFiles=fileDirList(self.fileOldPath)[1]
+            self.filenameChanged=False
         pass
 
     def timeFileName_read(self, filename):
@@ -182,7 +201,7 @@ class course_time(object):
         for course in self.course_list:
             if fileTime['week'] in course['week']:
                 day = course['time'][course['week'].index(fileTime['week'])]
-                if self.ctime_h_min <= fileTime['hour'] < self.ctime_h_max:
+                if fileTime['hour'] in self.__ctime_h:
                     if fileTime['minute'] >= self.__ctime_m[self.__ctime_h.index(fileTime['hour'])]:
                         number = self.__ctime_h.index(fileTime['hour']) + 1
                     else:
@@ -203,7 +222,10 @@ class course_time(object):
         for file in self.files:
             fileTime = self.timeFileName_read(file)
             course_name = self.course_time(fileTime)
-            self.course_filename[course_name].append(file)
+            if self.filenameChanged:
+                self.course_filename[course_name].append(file)
+            else:
+                self.course_filename[course_name].append(decontruct_filename(file))
         return self.course_filename
 
 if __name__=='__main__':
