@@ -1,4 +1,9 @@
 # ppt_photo_process
-Python stuff made to process ppt photos taken in class to be print-friendly.
+A Python project to process ppt photos taken in class to print-friendly format.
 
-Extra packages needed including ExifRead, matplotlib, numpy, opencv-python and shutil.
+Credit to:  
+ - ExifRead
+ - matplotlib
+ - numpy
+ - opencv-python
+ - shutil.
